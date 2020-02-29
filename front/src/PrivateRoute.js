@@ -13,7 +13,6 @@ function PrivateRoute({ component: Component, ...rest }) {
       .then(res => res.json())
       .then(res => {
         if (res.uuid === undefined || res.uuid === null) {
-          console.log("disconnected");
           setLog(false);
         } else setLog(true);
       });

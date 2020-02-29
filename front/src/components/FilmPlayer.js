@@ -19,7 +19,8 @@ const FilmPlayer = props => {
         setSub(res);
       });
   };
-  if (sub === null || sub.en === undefined) getSub();
+  if ((sub === null || sub.en === undefined) && props.imdbId !== undefined)
+    getSub();
 
   return (
     <Card>

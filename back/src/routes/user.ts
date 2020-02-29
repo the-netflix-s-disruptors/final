@@ -116,7 +116,6 @@ export default function UserRoutes(): Router {
                 res.status(200);
                 res.json({ status: 'SUCCESS' });
             } catch (e) {
-                console.error(e);
                 res.json({ status: 'ERROR' });
                 res.status(400);
             }

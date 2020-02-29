@@ -79,7 +79,6 @@ export default function MovieRoutes(): Router {
                 }));
                 res.json(result);
             } catch (e) {
-                // console.error(e);
                 res.json({ status: 'ERROR' });
                 res.status(400);
             }
@@ -116,7 +115,6 @@ export default function MovieRoutes(): Router {
                     res.status(200);
                     res.json({ status: 'SUCCESS' });
                 } catch (e) {
-                    // console.error(e);
                     res.json({ status: 'ERROR' });
                     res.status(400);
                 }
@@ -128,10 +126,10 @@ export default function MovieRoutes(): Router {
             // GET HASH OF THE MOVIE
             const filename = `public/${req.params.id}`;
             const info = await getHash(req.params.id);
-            // const magnet = `magnet:?xt=urn:btih:${info!.hash}&dn=${
-            //     info!.url
-            // }&tr=http://track.one:1234/announce&tr=udp://track.two:80`;
-            const magnet = `magnet:?xt=urn:btih:79816060ea56d56f2a2148cd45705511079f9bca&dn=TPB.AFK.2013.720p.h264-SimonKlose&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6`;
+            const magnet = `magnet:?xt=urn:btih:${info!.hash}&dn=${
+                info!.url
+            }&tr=http://track.one:1234/announce&tr=udp://track.two:80`;
+            // const magnet = `magnet:?xt=urn:btih:79816060ea56d56f2a2148cd45705511079f9bca&dn=TPB.AFK.2013.720p.h264-SimonKlose&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6`;
 
             // START DOWNLOAD
             const engine = torrentStream(magnet, {
@@ -158,7 +156,7 @@ export default function MovieRoutes(): Router {
             const file: any = await getTorrentStream(engine);
             touch.sync(filename);
             engine.on('download', (pieceIndex: number) => {
-                console.log(`downloading ...`);
+                // console.log(`downloading ...`);
             });
             res.on('close', () => {
                 engine.remove(true, () => {
@@ -176,7 +174,6 @@ export default function MovieRoutes(): Router {
                 return;
             }
         } catch (e) {
-            // console.error(e);
             res.json({ status: 'ERROR' });
             res.status(400);
         }
@@ -240,7 +237,6 @@ export default function MovieRoutes(): Router {
                 );
             }
         } catch (e) {
-            // console.error(e);
             res.json({ status: 'ERROR' });
             res.status(400);
         }

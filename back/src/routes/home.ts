@@ -137,7 +137,6 @@ export default function HomeRoutes(): Router {
 
             res.json(final);
         } catch (e) {
-            console.error(e);
             res.json({ status: 'ERROR' });
             res.status(400);
         }

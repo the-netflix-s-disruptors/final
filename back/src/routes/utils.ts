@@ -106,12 +106,12 @@ export const beginStream = (file: any, req: any, res: any) => {
         let progressBar: number = 0;
         flux.on('data', (chunk: any) => {
             progressBar += chunk.length;
-            console.log(
-                file.name +
-                    ': ' +
-                    Math.round((100 * progressBar) / file.length) +
-                    ' % '
-            );
+            // console.log(
+            //     file.name +
+            //         ': ' +
+            //         Math.round((100 * progressBar) / file.length) +
+            //         ' % '
+            // );
         });
         return pump(flux, res);
     }
@@ -127,15 +127,15 @@ export const convertStream = (file: any, res: any) => {
     let progressBar: number = 0;
     flux.on('data', (chunk: any) => {
         progressBar += chunk.length;
-        console.log(
-            file.name +
-                ': ' +
-                Math.round((100 * progressBar) / file.length) +
-                ' % '
-        );
+        // console.log(
+        //     file.name +
+        //         ': ' +
+        //         Math.round((100 * progressBar) / file.length) +
+        //         ' % '
+        // );
     });
     const convertedFlux: any = ffmpeg(flux)
-        .on('error', (err: any) => console.log(err))
+        .on('error', (err: any) => console.log(null))
         .audioBitrate(128)
         .audioCodec('libvorbis')
         .format('webm')
@@ -220,7 +220,6 @@ export const getSubtitles = (
     language: string,
     singleSub: boolean
 ) => {
-    console.log(language);
     return new Promise(async (resolve, reject) => {
         const response: any = {
             en: '',

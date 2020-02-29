@@ -317,8 +317,17 @@ export default function HomeList() {
             ))
           : "no result"}
       </Grid>
-
-      <Button
+      {
+        (window.onscroll = function(ev) {
+          if (
+            window.innerHeight + window.scrollY >=
+            document.body.offsetHeight
+          ) {
+            setLimit(limit + 15);
+          }
+        })
+      }
+      {/* <Button
         fullWidth
         component="button"
         onClick={() => {
@@ -326,7 +335,7 @@ export default function HomeList() {
         }}
       >
         MORE
-      </Button>
+      </Button> */}
 
       <Box mt={8}>
         <Footer />
