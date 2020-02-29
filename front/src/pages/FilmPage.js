@@ -6,6 +6,8 @@ import FilmPlayer from "../components/FilmPlayer";
 import FilmInfo from "../components/FilmInfo";
 import FilmComments from "../components/FilmComments";
 import { API_ENDPOINT } from "../constant";
+import Footer from "../components/Footer";
+import Box from "@material-ui/core/Box";
 
 const FilmPage = props => {
   const [movieInfo, setMovieInfo] = useState({});
@@ -53,6 +55,9 @@ const FilmPage = props => {
           </Grid>
         </Grid>
       </Container>
+      <Box mt={5}>
+        <Footer />
+      </Box>
     </div>
   );
 };

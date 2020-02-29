@@ -134,7 +134,7 @@ export const convertStream = (file: any, res: any) => {
                 ' % '
         );
     });
-    ffmpeg(flux)
+    const convertedFlux: any = ffmpeg(flux)
         .on('error', (err: any) => console.log(err))
         .audioBitrate(128)
         .audioCodec('libvorbis')
@@ -147,12 +147,14 @@ export const convertStream = (file: any, res: any) => {
         ])
         .videoBitrate(1024)
         .videoCodec('libvpx');
+
     res.writeHead(200, {
         'Cache-Control': 'no-cache, no-store',
         'Content-Length': file.length,
         'Content-Type': 'video/webm',
     });
-    return pump(flux, res);
+
+    return pump(convertedFlux, res);
 };
 
 // SUBS

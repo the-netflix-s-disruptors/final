@@ -14,7 +14,7 @@ import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { API_ENDPOINT } from "../constant";
-import Copyright from "../components/Copyright";
+import Footer from "../components/Footer";
 import Oauth from "../components/Oauth";
 
 const useStyles = makeStyles(theme => ({
@@ -171,7 +171,7 @@ export default function SignIn(props) {
       </div>
       <Oauth />
       <Box mt={8}>
-        <Copyright />
+        <Footer />
       </Box>
     </Container>
   );

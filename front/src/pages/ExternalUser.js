@@ -10,6 +10,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { API_ENDPOINT } from "../constant";
+import Footer from "../components/Footer";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -89,13 +91,16 @@ export default function ExternalUser(props) {
                   {user !== null &&
                   user.familyname !== null &&
                   user.familyname !== ""
-                    ? user.familyName
+                    ? user.familyname
                     : "none"}
                 </TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </Paper>
+        <Box mt={5}>
+          <Footer />
+        </Box>
       </Container>
     </div>
   );

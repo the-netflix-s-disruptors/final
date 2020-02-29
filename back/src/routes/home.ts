@@ -30,13 +30,13 @@ export default function HomeRoutes(): Router {
             if (
                 sortBy !== 'title' &&
                 sortBy !== 'rating' &&
-                sortBy !== 'years'
+                sortBy !== 'year'
             ) {
                 sortBy = 'download_count';
             } else if (
                 sortBy !== 'title' &&
                 sortBy !== 'rating' &&
-                sortBy !== 'years'
+                sortBy !== 'year'
             ) {
                 sortBy = 'title';
             }

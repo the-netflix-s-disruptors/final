@@ -13,7 +13,7 @@ import Container from "@material-ui/core/Container";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { API_ENDPOINT } from "../constant";
-import Copyright from "../components/Copyright";
+import Footer from "../components/Footer";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -122,7 +122,7 @@ export default function ResetPassword(props) {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
+        <Footer />
       </Box>
     </Container>
   );

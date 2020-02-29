@@ -128,9 +128,10 @@ export default function MovieRoutes(): Router {
             // GET HASH OF THE MOVIE
             const filename = `public/${req.params.id}`;
             const info = await getHash(req.params.id);
-            const magnet = `magnet:?xt=urn:btih:${info!.hash}&dn=${
-                info!.url
-            }&tr=http://track.one:1234/announce&tr=udp://track.two:80`;
+            // const magnet = `magnet:?xt=urn:btih:${info!.hash}&dn=${
+            //     info!.url
+            // }&tr=http://track.one:1234/announce&tr=udp://track.two:80`;
+            const magnet = `magnet:?xt=urn:btih:79816060ea56d56f2a2148cd45705511079f9bca&dn=TPB.AFK.2013.720p.h264-SimonKlose&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6`;
 
             // START DOWNLOAD
             const engine = torrentStream(magnet, {
@@ -154,11 +155,10 @@ export default function MovieRoutes(): Router {
                     'udp://tracker.internetwarriors.net:1337',
                 ], // Allows to declare additional custom trackers to use
             });
-
             const file: any = await getTorrentStream(engine);
             touch.sync(filename);
             engine.on('download', (pieceIndex: number) => {
-                // console.log(`downloading ...`);
+                console.log(`downloading ...`);
             });
             res.on('close', () => {
                 engine.remove(true, () => {
@@ -170,7 +170,6 @@ export default function MovieRoutes(): Router {
                 beginStream(file, req, res);
             } else if (file.type === 'mkv') {
                 convertStream(file, res);
-                // console.log('mkv');
             } else {
                 res.json({ status: 'ERROR' });
                 res.status(400);
@@ -196,7 +195,6 @@ export default function MovieRoutes(): Router {
                         const srt = await extSub(zip);
                         const vtt = await convSub(srt, req.params.imdbId, lang);
                     };
-
                     if (
                         sub['en'][0].url === null ||
                         sub['en'][0].url === undefined
@@ -205,10 +203,8 @@ export default function MovieRoutes(): Router {
                         res.status(400);
                         return;
                     }
-
                     // EN SUB
                     await setSub('en');
-
                     // USER LANG SUB IF NOT EN
                     let subCount = 0;
                     if (req.user.preferedLg === 'FR' && sub['fr'][0].url) {

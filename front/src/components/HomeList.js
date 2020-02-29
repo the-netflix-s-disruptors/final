@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -30,7 +30,7 @@ import Container from "@material-ui/core/Container";
 
 import { API_ENDPOINT } from "../constant";
 import { FRONT_ENDPOINT } from "../constant";
-import Copyright from "./Copyright";
+import Footer from "./Footer";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -75,7 +75,7 @@ export default function HomeList() {
   const [rating, setRating] = useState([0, 10]);
   const [year, setYear] = useState([1950, 2020]);
   const [result, setResult] = useState([]);
-  function postReq() {
+  useEffect(() => {
     fetch(`${API_ENDPOINT}/home/1/${limit}`, {
       credentials: "include",
       headers: {
@@ -97,7 +97,7 @@ export default function HomeList() {
       .then(res => {
         setResult(res);
       });
-  }
+  }, [limit, filterGender, rating, search, sortBy, year]);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -110,7 +110,7 @@ export default function HomeList() {
   const handleChange3 = (event, newValue) => {
     setYear(newValue);
   };
-  if (result[0] === undefined) postReq();
+
   return (
     <Container component="main">
       <ExpansionPanel
@@ -153,7 +153,7 @@ export default function HomeList() {
                     <ToggleButton value="rating" aria-label="centered">
                       RATING
                     </ToggleButton>
-                    <ToggleButton value="years" aria-label="right aligned">
+                    <ToggleButton value="year" aria-label="right aligned">
                       YEARS
                     </ToggleButton>
                     <ToggleButton value="gender" aria-label="right aligned">
@@ -181,7 +181,6 @@ export default function HomeList() {
                   <IconButton
                     className={classes.iconButton}
                     aria-label="search"
-                    onClick={postReq}
                   >
                     <SearchIcon />
                   </IconButton>
@@ -267,7 +266,6 @@ export default function HomeList() {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={postReq}
         >
           GO
         </Button>
@@ -325,14 +323,13 @@ export default function HomeList() {
         component="button"
         onClick={() => {
           setLimit(limit + 9);
-          postReq();
         }}
       >
         MORE
       </Button>
 
       <Box mt={8}>
-        <Copyright />
+        <Footer />
       </Box>
     </Container>
   );

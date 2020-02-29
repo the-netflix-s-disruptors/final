@@ -177,8 +177,6 @@ export default function UserRoutes(): Router {
                     to: req.body.email,
                     html: `Hello, reset your password here <a href=${url}>here</a>`,
                 });
-                console.log(url);
-
                 res.status(200);
                 res.json({ status: 'SUCCESS' });
             } catch (e) {
@@ -272,7 +270,6 @@ export default function UserRoutes(): Router {
             res.status(200);
             res.json({ status: 'SUCCESS' });
         } catch (e) {
-            console.error(e);
             res.json({ status: 'ERROR' });
             res.status(400);
         }

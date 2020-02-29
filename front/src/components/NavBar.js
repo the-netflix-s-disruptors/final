@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function NavBar() {
   const classes = useStyles();
+  const [redirect, setRedirect] = useState(false);
 
   function logOut() {
     fetch(`${API_ENDPOINT}/auth/logout`, {
@@ -34,10 +35,11 @@ export default function NavBar() {
       },
       method: "GET"
     });
-    return <Redirect to="/sign-in" />;
+    setRedirect(true);
   }
   return (
     <div className={classes.root}>
+      {redirect === true ? <Redirect to="/sign-in" /> : null}
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>

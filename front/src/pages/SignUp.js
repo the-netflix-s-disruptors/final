@@ -13,7 +13,7 @@ import Container from "@material-ui/core/Container";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { API_ENDPOINT } from "../constant";
-import Copyright from "../components/Copyright";
+import Footer from "../components/Footer";
 import Oauth from "../components/Oauth";
 
 const useStyles = makeStyles(theme => ({
@@ -224,7 +224,7 @@ export default function SignUp() {
       </div>
       <Oauth />
       <Box mt={5}>
-        <Copyright />
+        <Footer />
       </Box>
     </Container>
   );

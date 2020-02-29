@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,7 +13,7 @@ import Alert from "@material-ui/lab/Alert";
 import { API_ENDPOINT } from "../constant";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import Copyright from "../components/Copyright";
+import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import { FRONT_ENDPOINT } from "../constant";
 
@@ -212,7 +212,7 @@ export default function UserEdition() {
       });
   }
 
-  function postPic() {
+  useEffect(() => {
     const formData = new FormData();
     formData.append("profile", picture);
 
@@ -226,12 +226,13 @@ export default function UserEdition() {
         if (res.status === "SUCCESS") {
           setActivate(2);
           setPayload("Photo Successfully changed !");
+          getUser();
         } else {
           setActivate(1);
           setPayload("Photo: Invalid input");
         }
       });
-  }
+  }, [picture]);
   return (
     <div>
       <NavBar />
@@ -432,8 +433,6 @@ export default function UserEdition() {
                     name="profile"
                     onChange={e => {
                       setPicture(e.target.files[0]);
-                      postPic();
-                      getUser();
                     }}
                   />
                   <label htmlFor="contained-button-file">
@@ -463,7 +462,7 @@ export default function UserEdition() {
           </form>
         </div>
         <Box mt={8}>
-          <Copyright />
+          <Footer />
         </Box>
       </Container>
     </div>

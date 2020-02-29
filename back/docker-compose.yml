@@ -24,8 +24,6 @@ services:
     setupCloud:
         container_name: setupCloud
         image: minio/mc
-        volumes:
-            - ./seed/images:/tmp
         depends_on:
             - cloud
         entrypoint: >
